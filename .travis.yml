@@ -11,5 +11,5 @@ install:
  # - tests
   
 script:
-  - python ./odoo-bin
+  - python ./addons/tests
 

@@ -1,22 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @BrayhanJC Sign out
-1
-0 76 LasLabs/pylint-odoo
-forked from OCA/pylint-odoo
- Code  Pull requests 0  Projects 0  Wiki  Insights
-pylint-odoo/.travis.yml
-e425b62  on 14 Jul 2016
-@moylop260 moylop260 [IMP] pylint_odoo: Enable cProfile print stats
-@moylop260 @lescobarvx
-     
-57 lines (45 sloc)  1.76 KB
 language: python
 
 sudo: false
@@ -73,16 +54,3 @@ deploy:
     secure: hKfey6oW+K7HWxE6NJP4O9NtLnnrlofvyLAdoTk6TTA5ucqVizud7vAZN2eCu4Ftw+coTvmJLnZiy9qAREPhe3yeVyfcAOJZr4qQpH8Nzm0VKzKvOpq0L0PTFaNk1Btmmw7lbicGZsLm2qLj0dgg8pDBQ/q6U+A54gfAy3ddIAcdOP1tfdVIC1TPuSXxa8IBEec4BLE4Ao/gKoUBV9MSWyd3TgUbEycNAHHU27muhGxzEyOMW4GBgklyAjwtCzcMIPP8YW8uethCw+9nvU6q1petJYviLwM+txYrHHrgENS2yec8oFbqfXzYXprrx05BHvSdBZT5Rq2tGo02FG17FZ/HNx7g0lS7pRcyfx+8Vapf88pJdaW9rQmP90PEV5mO7EpOJ30s+xp02OIeUSkNIhIXCf9EGibW2gQynljqyuHdl1pBabBSFxA/9JICEyGEYkIRnOaKKzqBHjcpvh0AgpD/JpX5YkIc9bGjYRMiKh7bVM0JXHk1RUeC70jqAGRCObFGBF94O02POoOsRNL3+y7B+tEfbfpaSQQzqGtcfNpR/x6I5MzgNTDMGnzeUipiZM0dYaqcHdY8eAwKRMXIBVmB9JxRP+qjKtg+gSHSB4Mcmgm7hwyUWAvmxt3BnlHfF+ayyKzd0idnjGR0Gd2korndxGf0ZBbSqjkgCtPpdow=
   on:
     tags: true
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Press h to open a hovercard with more details.

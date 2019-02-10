@@ -16,4 +16,4 @@ install:
  
 
 script:
-  - python -m unittest -v addons/tests/account_test_users.py
+  - python addons/tests/account_test_users.py

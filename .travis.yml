@@ -12,4 +12,4 @@ install:
  # - tests
   
 script:
-  - python ./odoo-bin
+  - python ./tests

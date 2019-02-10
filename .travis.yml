@@ -10,4 +10,4 @@ install:
  # - tests
   
 script:
-  - python tests
+  - python addons/tests/account_test_users.py

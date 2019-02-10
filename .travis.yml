@@ -1,24 +1,36 @@
+sudo: required
+
+language: python
+
 python:
-  - "2.7"
+  - "2.7.15"
+
+services:
+  - docker
+
+git:
+  depth: 1
+
+branches:
+  only:
+    - master
 
 env:
-  - VERSION="10.0" LINT_CHECK="0"
-  - VERSION="10.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
-  - VERSION="10.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
-  - VERSION="10.0" UNIT_TEST="1" LINT_CHECK="0"
+  global:
+    # Variables found by default in Docker Hub builder
+    - DOCKER_REPO=tecnativa/doodba
+  matrix:
+    - DOCKER_TAG=10.0
 
-
-virtualenv:
-  system_site_packages: true
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::=--force-confnew install docker-ce
+  - pip install -r requirements-ci.txt
 
 install:
-  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-  - sudo pip install unidecode
-#  - travis_install_nightly
+  - chown -R $USER:$USER .
+  - chmod -R +r .
+  - ./hooks/build
 
 script:
-  - travis_run_tests
-
-after_success:
-  coveralls
+  - python -m unittest -v tests

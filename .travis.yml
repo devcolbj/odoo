@@ -1,36 +1,13 @@
-sudo: required
-
 language: python
-
 python:
   - "2.7.15"
 
-services:
-  - docker
-
-git:
-  depth: 1
-
-branches:
-  only:
-    - 10.01
-
-env:
-  global:
-    # Variables found by default in Docker Hub builder
-    - DOCKER_REPO=tecnativa/doodba
-  matrix:
-    - DOCKER_TAG=10.0
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::=--force-confnew install docker-ce
-  - pip install -r requirements-ci.txt
-
+# command to install dependencies
 install:
-  - chown -R $USER:$USER .
-  - chmod -R +r .
-  - ./hooks/build
-
+  - pip install -r requirements.txt
+# command to run tests
+#script:
+ # - tests
+  
 script:
   - python -m unittest -v tests

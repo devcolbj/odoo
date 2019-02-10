@@ -6,7 +6,7 @@ python:
 install:
 
   - pip install -r requirements.txt
-  pip install --upgrade --pre pylint-odoo
+  - pip install --upgrade --pre pylint-odoo
 # command to run tests
 #script:
  # - tests

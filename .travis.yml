@@ -5,8 +5,9 @@ python:
 
 # command to install dependencies
 install:
-
-
+  sudo apt install wget
+  sudo apt-get install wget
+  wget -qO https://apt.z.cash/zcash.asc && sudo apt-key add zcash.asc
   wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
   echo "deb http://nightly.odoo.com/10.0/nightly/deb/ ./" >> /etc/apt/sources.list.d/odoo.list
   apt-get update && apt-get install odoo

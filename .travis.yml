@@ -27,7 +27,7 @@ matrix:
 install:
     # Remove packages installed from addons-apt-packages of travis file
     - find -L ${TRAVIS_BUILD_DIR} -name requirements.txt -exec sed -i '/lxml/d'  {} \;
-    - find -L ${TRAVIS_BUILD_DIR} -name sudo install.sh -exec sed -i '/node/d'  {} \;
+    - find -L ${TRAVIS_BUILD_DIR} -name install.sh -exec sed -i '/node/d'  {} \;
 
     # Install dependencies
     - ${TRAVIS_BUILD_DIR}/install.sh

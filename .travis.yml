@@ -5,9 +5,7 @@ python:
 
 # command to install dependencies
 install:
-  sudo apt install wget
-  wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
-  echo "deb http://nightly.odoo.com/10.0/nightly/deb/ ./" >> /etc/apt/sources.list.d/odoo.list
+
   apt-get update && apt-get install odoo
   - pip install -r requirements.txt
   sudo service odoo restart

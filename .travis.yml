@@ -1,14 +1,19 @@
-
 language: python
 python:
-  - "2.7.15"
+
+  - "2.7"
 
 # command to install dependencies
 install:
+  sudo apt install wget
+  wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
+  echo "deb http://nightly.odoo.com/10.0/nightly/deb/ ./" >> /etc/apt/sources.list.d/odoo.list
+  apt-get update && apt-get install odoo
   - pip install -r requirements.txt
+  sudo service odoo restart
+  sudo systemctl enable odoo
+  sudo systemctl start odoo
 # command to run tests
-#script:
- # - tests
-  
+
 script:
-  - python odoo/addons/tests
+  - addons/tests

@@ -1,12 +1,21 @@
+
+
+
 language: python
-
 python:
-  - "2.7"
-
+  - "2.7.15"
 
 before_install:
   - pip install pytest-cov
-  - cd python
+  - cd python 
+  
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+#script:
+ # - tests
+ 
 
-script: 
-  - py.test -v --cov=maths
+script:
+  - python -m unittest -v /addons/tests/account_test_users.py

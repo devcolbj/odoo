@@ -13,7 +13,7 @@ git:
 
 branches:
   only:
-    - master
+    - 10.01
 
 env:
   global:

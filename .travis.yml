@@ -1,23 +1,88 @@
-sudo: required
+Skip to content
+ 
+Search or jump to…
 
+Pull requests
+Issues
+Marketplace
+Explore
+ @BrayhanJC Sign out
+1
+0 76 LasLabs/pylint-odoo
+forked from OCA/pylint-odoo
+ Code  Pull requests 0  Projects 0  Wiki  Insights
+pylint-odoo/.travis.yml
+e425b62  on 14 Jul 2016
+@moylop260 moylop260 [IMP] pylint_odoo: Enable cProfile print stats
+@moylop260 @lescobarvx
+     
+57 lines (45 sloc)  1.76 KB
 language: python
 
-services:
-  - docker
+sudo: false
+cache:
+  apt: true
+  directories:
+    - $HOME/.cache/pip
 
-env:
+addons:
+  apt:
+    packages:
+      - python-lxml  # because pip installation is slow 
+      - nodejs
 
-  matrix:
-    - TESTS="1"
-    - LINT_CHECK="1"
+virtualenv:
+  system_site_packages: true
+
+matrix:
+  include:
+    - python: 2.7
+      env:
+        TOXENV=py27-pylint14
+    - python: 2.7
+      env:
+        TOXENV=py27-pylint20
 
 install:
-  - git clone --depth=1 https://github.com/LasLabs/docker-quality-tools.git ${HOME}/docker-quality-tools
-  - export PATH=${HOME}/docker-quality-tools/travis:${PATH}
-  - travis_install_all
+    # Remove packages installed from addons-apt-packages of travis file
+    - find -L ${TRAVIS_BUILD_DIR} -name requirements.txt -exec sed -i '/lxml/d'  {} \;
+    - find -L ${TRAVIS_BUILD_DIR} -name install.sh -exec sed -i '/node/d'  {} \;
+
+    # Install dependencies
+    - ${TRAVIS_BUILD_DIR}/install.sh
+
+    # Install testing dependencies
+    - pip install --upgrade pyopenssl ndg-httpsclient pyasn1
+    - pip install coveralls flake8
+
+    # Install tox
+    - pip install tox
 
 script:
-  - travis_run_all
+    - flake8 --exclude=__init__.py .
+    - tox -e $TOXENV,profile-stats
 
 after_success:
-  - travis_after_success_all
+    - coveralls
+    - python setup.py sdist  # Build ChangeLog file from git log
+
+deploy:
+  provider: pypi
+  user: oca
+  password:
+    secure: hKfey6oW+K7HWxE6NJP4O9NtLnnrlofvyLAdoTk6TTA5ucqVizud7vAZN2eCu4Ftw+coTvmJLnZiy9qAREPhe3yeVyfcAOJZr4qQpH8Nzm0VKzKvOpq0L0PTFaNk1Btmmw7lbicGZsLm2qLj0dgg8pDBQ/q6U+A54gfAy3ddIAcdOP1tfdVIC1TPuSXxa8IBEec4BLE4Ao/gKoUBV9MSWyd3TgUbEycNAHHU27muhGxzEyOMW4GBgklyAjwtCzcMIPP8YW8uethCw+9nvU6q1petJYviLwM+txYrHHrgENS2yec8oFbqfXzYXprrx05BHvSdBZT5Rq2tGo02FG17FZ/HNx7g0lS7pRcyfx+8Vapf88pJdaW9rQmP90PEV5mO7EpOJ30s+xp02OIeUSkNIhIXCf9EGibW2gQynljqyuHdl1pBabBSFxA/9JICEyGEYkIRnOaKKzqBHjcpvh0AgpD/JpX5YkIc9bGjYRMiKh7bVM0JXHk1RUeC70jqAGRCObFGBF94O02POoOsRNL3+y7B+tEfbfpaSQQzqGtcfNpR/x6I5MzgNTDMGnzeUipiZM0dYaqcHdY8eAwKRMXIBVmB9JxRP+qjKtg+gSHSB4Mcmgm7hwyUWAvmxt3BnlHfF+ayyKzd0idnjGR0Gd2korndxGf0ZBbSqjkgCtPpdow=
+  on:
+    tags: true
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
